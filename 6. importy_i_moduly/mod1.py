@@ -1,16 +1,23 @@
-def dodawanie(a, b):
+"""modul 1"""
+
+def dodawanie(a: float, b: float) -> float:
+    """Funkcja zwraca sumę dwóch liczb"""
     return a + b
 
-def odejmowanie(a, b):
+def odejmowanie(a: float, b: float) -> float:
+    """Funkcja zwraca różnicę dwóch liczb"""
     return a - b
 
-def mnozenie(a, b):
+def mnozenie(a: float, b: float) -> float:
+    """Funkcja zwraca iloczyn dwóch liczb"""
     return a * b
 
-def dzielenie(a, b):
+def dzielenie(a: float, b: float) -> float:
+    """Funkcja zwraca iloraz dwóch liczb"""
     return a / b
 
-def menu():
+def menu() -> None:
+    """Funkcja wyświetla dostępne operacje"""
     print("Wybierz operację:")
     print("1. Dodawanie")
     print("2. Odejmowanie")
@@ -18,7 +25,8 @@ def menu():
     print("4. Dzielenie")
     print("5. Wyjście")
     
-def calculator():
+def calculator() -> None:
+    """Funkcja umożliwia użytkownikowi korzystanie z kalkulatora"""
     while True:
         wybor = input("Wybierz działanie (1-dodawanie, 2-odejmowanie, 3-mnożenie, 4-dzielenie, 5-wyjście): ")
 
@@ -44,6 +52,6 @@ def calculator():
                 continue
             wynik = dzielenie(a, b)
 
-menu()
-calculator()
-print("Koniec programu")
+        print(f"Wynik: {wynik}")
+
+

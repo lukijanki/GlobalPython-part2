@@ -1,5 +1,6 @@
 import json
 from os import path
+from typing import Dict
 
 dir_path = path.dirname(__file__)
 filename = "tekst.txt"
@@ -13,7 +14,17 @@ for line in file_lines:
     words_list.extend(words)
 print("liczba slow:" + str(len(words_list)))
 
+endings: Dict[str, int] = {}
 
+for word in words_list:
+    last_letter = word[-1]
+    if last_letter in endings:
+        endings[last_letter] += 1
+    else:
+        endings[last_letter] = 1
+
+print("Statystyki końcówek słów:")
+print(json.dumps(endings, indent=4))
 
 
 

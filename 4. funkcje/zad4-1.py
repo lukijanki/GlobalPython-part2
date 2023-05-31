@@ -43,7 +43,7 @@ def calculator():
                 print("Nie można dzielić przez zero")
                 continue
             wynik = dzielenie(a, b)
-
+        print("Wynik:", wynik)
 menu()
 calculator()
 print("Koniec programu")

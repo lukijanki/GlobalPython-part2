@@ -1,4 +1,6 @@
-class Pojazd:
+from abc import ABC, abstractmethod
+
+class Pojazd(ABC):
     def __init__(self, marka, model, rok_produkcji, kolor):
         self.marka = marka
         self.model = model
@@ -11,6 +13,14 @@ class Pojazd:
     def __str__(self):
         return f"{self.marka} {self.model}, rok produkcji: {self.rok_produkcji}, kolor: {self.kolor}"
 
+    @abstractmethod
+    def przyspiesz(self):
+        pass
+
+    @abstractmethod
+    def zatrzymaj(self):
+        pass
+
 class Jednoslad(Pojazd):
     def __init__(self, marka, model, rok_produkcji, kolor, rodzaj_napedu):
         super().__init__(marka, model, rok_produkcji, kolor)
@@ -19,6 +29,9 @@ class Jednoslad(Pojazd):
     def przyspiesz(self):
         print("przyspiesza!")
 
+    def zatrzymaj(self):
+        print("zatrzymuje!")
+
     def __str__(self):
         return super().__str__() + f", rodzaj napędu: {self.rodzaj_napedu}"
 
@@ -26,6 +39,9 @@ class Wieloslad(Pojazd):
     def __init__(self, marka, model, rok_produkcji, kolor, liczba_kol):
         super().__init__(marka, model, rok_produkcji, kolor)
         self.liczba_kol = liczba_kol
+
+    def przyspiesz(self):
+        print("przyspiesza!")
 
     def zatrzymaj(self):
         print("zatrzymuje!")

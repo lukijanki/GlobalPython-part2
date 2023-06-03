@@ -1,6 +1,7 @@
 import json
 from typing import List, Dict
 from datetime import datetime
+import os
 
 class TaskManager:
     def __init__(self):
@@ -123,7 +124,9 @@ class TaskManager:
         """
         Zapisywanie zadania.
         """
-        with open("tasks.json", "w") as f:
+        dir_path = os.path.dirname(os.path.abspath(__file__))
+        save_path = os.path.join(dir_path, "tasks.json")
+        with open(save_path, "w") as f:
             json.dump(self._tasks, f)
         print("Zadania zapisane do pliku.")
 
@@ -131,8 +134,10 @@ class TaskManager:
         """
         Odczyt zadania.
         """
+        dir_path = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(dir_path, "tasks.json")
         try:
-            with open("tasks.json", "r") as f:
+            with open(file_path, "r") as f:
                 self._tasks = json.load(f)
         except FileNotFoundError:
             pass

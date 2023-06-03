@@ -36,23 +36,30 @@ class TaskManager:
             except ValueError:
                 print("Niepoprawny format daty. Spróbuj ponownie.")
         day_of_week: str = self.validate_day("Podaj dzień tygodnia po angielsku: Zostaw puste jeżeli bez dnia tygodnia!")
-        task_id: int = len(self._tasks) + 1
+        task_ids = [int(task["id"]) for task in self._tasks]
+        if task_ids:
+            max_id = max(task_ids)
+            available_ids = [i for i in range(1, max_id + 2) if i not in task_ids]
+            task_id = min(available_ids)
+        else:
+            task_id = 1
+        
         task: Dict[str, str] = {"id": str(task_id), "title": title, "description": description, "deadline": deadline, "day_of_week": day_of_week}
         self._tasks.append(task)
         print("Zadanie dodane!")
-
+        
     def display_tasks(self) -> None:
         """
         Wyświetlanie zadania.
         """
         if not self._tasks:
-            print("Brak zadań.")
+            print("Brak zadań do wyświetlenia.")
             return
         day_of_week: str = self.validate_day("Wprowadź dzień tygodnia, aby wyświetlić zadania (zostaw puste, aby wyświetlić wszystkie zadania): ")
         found_tasks: bool = False
         for task in self._tasks:
             if not day_of_week or task['day_of_week'].lower() == day_of_week.lower():
-                print(f"{task['id']}: {task['title']} (Deadline: {task['deadline']})")
+                print(f"ID:{task['id']} Nazwa: {task['title']} (Deadline: {task['deadline']})")
                 show_description: str = input("Czy chcesz zobaczyć opis? (t/n): ")
                 if show_description.lower() == 't':
                     print(f"Opis: {task['description']}")
@@ -66,11 +73,11 @@ class TaskManager:
         """
         self.load_tasks()
         if not self._tasks:
-            print("Brak zadań.")
+            print("Brak zadań do wyświetlenia.")
             return
         found_tasks: bool = False
         for task in self._tasks:
-                print(f"{task['id']}: {task['title']} (Deadline: {task['deadline']})")
+                print(f"ID:{task['id']} Nazwa: {task['title']} (Deadline: {task['deadline']})")
                 show_description: str = input("Czy chcesz zobaczyć opis? (t/n): ")
                 if show_description.lower() == 't':
                     print(f"Opis: {task['description']}")
